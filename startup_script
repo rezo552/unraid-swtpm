@@ -1,0 +1,13 @@
+ln -s /usr/lib64/libcrypto.so /usr/lib64/libcrypto.so.1
+
+swtpm_ret=1
+until [ -f /var/run/libvirt/libvirtd.pid ] && [ $swtpm_ret -eq 0 ]
+do
+  sleep 10
+  which swtpm
+  swtpm_ret=$?
+done
+
+chmod 755 /var/lib -R
+ln -s /mnt/user/domains/Windows\ 10/141d5517-bb66-23b3-6373-c428xxxxxx /var/lib/libvirt/swtpm/141d5517-bb66-23b3-6373-c428xxxxxx
+
